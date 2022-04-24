@@ -1,0 +1,16 @@
+version: '3'
+services:
+  php:
+    image: "php:7.4-fpm"
+    volumes:
+      - ../src/php:/usr/share/nginx/html
+    environment:
+      - RECAPTCHA_SITE_KEY
+      - RECAPTCHA_SECRET_KEY
+  nginx:
+    image: "nginx:latest"
+    volumes:
+      - ../src/html:/usr/share/nginx/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
